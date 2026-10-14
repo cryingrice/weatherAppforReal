@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">weatherAppforReal</string>
+    <string name="temperature_format">%1$d°</string>
+</resources>
