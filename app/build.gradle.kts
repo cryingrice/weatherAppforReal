@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)
@@ -44,7 +44,16 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation("com.google.android.gms:play-services-location:21.4.0")
+
+    //mapbox
+    implementation("com.mapbox.maps:android-ndk27:11.34.2")
+    //noinspection UseTomlInstead
+    implementation("com.mapbox.extension:maps-compose-ndk27:11.34.2")
 
     testImplementation(libs.junit)
 
@@ -56,4 +65,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
+    // Retrofit
+
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    // Retrofit GSON Converter
+
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 }

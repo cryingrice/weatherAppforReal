@@ -16,15 +16,10 @@
       android:strokeColor="#91c0f8"
       android:strokeLineCap="round"/>
   <path
-      android:pathData="M27.174,33.015L25.785,40.894"
-      android:strokeWidth="2"
-      android:fillColor="#00000000"
-      android:strokeColor="#91c0f8"
-      android:strokeLineCap="round"/>
-  <path
       android:pathData="M30.94,34.694L29.551,42.573"
       android:strokeWidth="2"
       android:fillColor="#00000000"
       android:strokeColor="#91c0f8"
       android:strokeLineCap="round"/>
+
 </vector>
