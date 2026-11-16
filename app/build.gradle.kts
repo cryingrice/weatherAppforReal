@@ -1,13 +1,24 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 }
 
+// Load local.properties at configuration time
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        load(FileInputStream(file))
+    }
+}
+
+val mapboxAccessToken: String = localProperties.getProperty("MAPBOX_ACCESS_TOKEN", "")
+
 android {
     namespace = "com.example.weatherappforreal"
-    compileSdk {
-        version = release(37)
-    }
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.example.weatherappforreal"
@@ -17,6 +28,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Injects mapbox_access_token as R.string.mapbox_access_token at build time
+        resValue("string", "mapbox_access_token", mapboxAccessToken)
     }
 
     buildTypes {
@@ -34,41 +48,4 @@ android {
         compose = true
     }
 }
-
-dependencies {
-
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigation.compose)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
-    implementation("io.coil-kt:coil-compose:2.7.0")
-    implementation("com.google.android.gms:play-services-location:21.4.0")
-
-    //mapbox
-    implementation("com.mapbox.maps:android-ndk27:11.34.2")
-    //noinspection UseTomlInstead
-    implementation("com.mapbox.extension:maps-compose-ndk27:11.34.2")
-
-    testImplementation(libs.junit)
-
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.junit)
-
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-
-    // Retrofit
-
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    // Retrofit GSON Converter
-
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-}
+// ... dependencies
